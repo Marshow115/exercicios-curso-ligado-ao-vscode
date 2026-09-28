@@ -1,12 +1,16 @@
 
 biblioteca = {}
 
-
 def adicionar():
-    titulo = input("Adicione um título: ")
-    autor = input("Quem é o autor? ")
+    """Adiciona um livro à biblioteca.
+    """
+    livro = {}
+    livro["titulo"] = input("Adicione um título: ")    
+    livro["autor"] = input("Quem é o autor? ")
+    livro["disponivel"] = True
 
-    biblioteca[titulo] = autor
+
+    biblioteca[livro["titulo"]] = livro
     print("Livro adicionado!")
 
 
@@ -14,28 +18,36 @@ def estante():
     if biblioteca:
         print("\nLivros disponíveis:")
 
-        for titulo, autor in biblioteca.items():
-            print(f"{titulo} - {autor}")
+        for titulo, livro in biblioteca.items():
+            print(f"{titulo} - {livro['autor']} ({'Disponível' if livro['disponivel'] else 'Indisponível'})")
     else:
         print("A biblioteca está vazia.")
 
 
 def pesquisar():
+    """Pesquisa um livro na biblioteca.
+    """
     titulo = input("Qual livro está procurando? ")
 
     if titulo in biblioteca:
-        print(f"{titulo} - {biblioteca[titulo]}")
+        print(f"{titulo} - {biblioteca[titulo]['autor']} ({'Disponível' if biblioteca[titulo]['disponivel'] else 'Indisponível'})")
     else:
         print("Livro não encontrado.")
 
 
 def emprestar():
+    """Empresta um livro da biblioteca.
+    """
     titulo = input("Qual livro você quer emprestar? ")
 
     if titulo in biblioteca:
-        print("Empréstimo feito com sucesso!")
+        if biblioteca[titulo]["disponivel"]:
+            biblioteca[titulo]["disponivel"] = False
+            print("Empréstimo feito com sucesso!")
+        else:
+            print("Esse livro não está disponível.")
     else:
-        print("Esse livro não está disponível.")
+        print("Livro não encontrado.")
 
 
 while True:
