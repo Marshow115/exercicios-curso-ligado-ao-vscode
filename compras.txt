@@ -1,0 +1,4 @@
+Lista de compras
+carne - R$99.00
+macarrão - R$3.00
+Total: R$102.00
